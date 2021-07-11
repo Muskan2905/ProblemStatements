@@ -3,27 +3,27 @@
 
 //Implementing FCFS ALGORITHM
 
-
-void implement_FCFS(int,int [],int []);
+void implement_FCFS(int,int [],int [],int []);
 
 int main(){
-    int n,i,arr_time[10],cpu_time[10];
+    int n,i,arr_time[10],cpu_time[10],process_id[10];
     printf("Enter the number of processes to be executed\n");
     scanf("%d",&n);
     printf("Enter the arrival time for each process\n");
     for(i=0;i<n;i++){
         scanf("%d",&arr_time[i]);
+        process_id[i] = i+1;
     }
     printf("Enter CPU burst time for each process\n");
     for(i=0;i<n;i++){
         scanf("%d",&cpu_time[i]);
     }
     printf("Implementing FCFS\n");
-    implement_FCFS(n,arr_time,cpu_time);
+    implement_FCFS(n,arr_time,cpu_time,process_id);
 return 0;
 }
 
-void implement_FCFS(int n, int arr_time[],int cpu_time[]){
+void implement_FCFS(int n, int arr_time[],int cpu_time[],int process_id[]){
 //Process Diagram
 int i,j,process[10],tt=0,tat[10],flag,temp;
 float sum =0;
@@ -38,6 +38,9 @@ for(i=0;i<n-1;i++){
         temp = cpu_time[j];
         cpu_time[j] = cpu_time[j+1];
         cpu_time[j+1] = temp;
+        temp = process_id[j];
+        process_id[j] = process_id[j+1];
+        process_id[j+1] = temp;
         flag = 1;
     }
    }
@@ -53,7 +56,7 @@ for(i = 0;i<n;i++){
   for(i=0;i<n;i++){
     tat[i] = process[i] - arr_time[i];
     sum = sum + tat[i];
-    printf("Turn Around Time of P%d in sequence: %d\n",i+1,tat[i]);
+    printf("Turn Around Time of P%d in sequence: %d\n",process_id[i],tat[i]);
   }
   printf("\nAverage Turn Around Time = %f\n",(sum/n));
   //calculate waiting Time = TAT - CPU TIME
@@ -61,7 +64,7 @@ for(i = 0;i<n;i++){
   for(j=0;j<n;j++){
     int wt = tat[j] - cpu_time[j];
     sum = sum + wt;
-    printf("Waiting Time of P%d in sequence: %d\n",j+1,wt);
+    printf("Waiting Time of P%d in sequence: %d\n",process_id[j],wt);
   }
   printf("\nAverage Waiting Time = %f",(sum/n));
 }
