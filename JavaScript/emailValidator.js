@@ -36,9 +36,9 @@ else{
     console.log("You need to enter characters before and after '@'.")
 }
  function check_userName(user_name){
-     for(let i = 1;i<splittedEmail[0].length;i++){
+     for(let i = 1;i<user_name.length;i++){
     flag = 0;
-    if(((/[a-zA-Z]/).test(splittedEmail[0][i])) || (splittedEmail[0][i] >= "0" && splittedEmail[0][i] <="9") || splittedEmail[0][i] === "-" || splittedEmail[0][i] === "_" || splittedEmail[0][i] === "."){
+    if(((/[a-zA-Z]/).test(user_name[i])) || (user_name[i] >= "0" && user_name[i] <="9") || user_name[i] === "-" || user_name[i] === "_" || user_name[i] === "."){
         flag = 1;
     }
     if(flag == 0){
